@@ -1,0 +1,13 @@
+<Project Sdk="Godot.NET.Sdk/4.7.2">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <EnableDynamicLoading>true</EnableDynamicLoading>
+    <RootNamespace>UnitFighting</RootNamespace>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- The headless balance bench is its own console project that compiles src/Sim directly. -->
+    <Compile Remove="tests/SimBench/**" />
+    <None Remove="tests/SimBench/**" />
+  </ItemGroup>
+</Project>

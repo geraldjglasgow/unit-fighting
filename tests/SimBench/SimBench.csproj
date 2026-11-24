@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- Headless balance bench: compiles the pure-C# sim directly and runs it as a console app.
+       Godot's Vector2/Mathf are plain managed structs, so no engine is needed. -->
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>disable</Nullable>
+    <LangVersion>latest</LangVersion>
+    <RootNamespace>SimBench</RootNamespace>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <InvariantGlobalization>true</InvariantGlobalization>
+    <TieredPGO>true</TieredPGO>
+    <ServerGarbageCollection>false</ServerGarbageCollection>
+    <NoWarn>$(NoWarn);CS8632</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup>
+    <!-- Override with -p:SimDir=/path/to/Sim to bench an experimental copy of the sim. -->
+    <SimDir Condition="'$(SimDir)' == ''">../../src/Sim</SimDir>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(SimDir)/**/*.cs" Link="Sim/%(RecursiveDir)%(Filename)%(Extension)" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="GodotSharp" Version="4.7.2" />
+  </ItemGroup>
+</Project>
